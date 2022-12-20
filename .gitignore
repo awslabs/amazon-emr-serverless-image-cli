@@ -1,0 +1,9 @@
+venv/
+.build_mac/
+.idea
+__pycache__
+build
+dist
+*.egg-info
+.coverage
+.DS_Store
