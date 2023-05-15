@@ -51,7 +51,7 @@ In the root directory, you can directly use python3 command to run the validatio
 Then run command:
 
 ```
-python3 -m amazon-emr-serverless-image validate-image -i <image_name> -r <release_name> [-t <image_type>]
+python3 -m amazon_emr_serverless_image validate-image -i <image_name> -r <release_name> [-t <image_type>]
 ```
 
 -i specifies the local image URI that needs to be validated, this can be the image URI or any name/tag you defined for your image.

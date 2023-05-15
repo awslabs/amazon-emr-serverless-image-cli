@@ -58,7 +58,7 @@ amazon-emr-serverless-image validate-image -i <image_name> -r <release_name> [-t
 
 -i specifies the local image URI that needs to be validated, this can be the image URI or any name/tag you defined for your image.
 
--r specifies the exact release version of the EMR base image used to generate the customized image. It only supports `emr-6.9.0` for now.
+-r specifies the exact release version of the EMR base image used to generate the customized image. It supports `emr-6.9.0` and newer releases.
 
 -t specifies the image type. The default value is `spark`. It also accepts `hive`.
 
@@ -156,7 +156,7 @@ Custom Image Validation Failed. Please see individual test results above for det
 
 ## Support
 
-This tool is only supported for EMR Serverless 6.9.0. Future releases will be supported. Usage of the validation tool does not guarantee your image or job will run in EMR Serverless, but is meant to help validate common configuration issues.
+This tool is only supported for EMR Serverless 6.9.0 and 6.10.0. Future releases will be supported. Usage of the validation tool does not guarantee your image or job will run in EMR Serverless, but is meant to help validate common configuration issues.
 
 ## Security
 

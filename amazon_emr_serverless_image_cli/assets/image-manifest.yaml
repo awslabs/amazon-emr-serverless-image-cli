@@ -1,7 +1,7 @@
 !ImageManifest
 EmrReleases:
 - !EmrRelease
-  ReleaseName: emr-6.9.0
+  ReleaseName: emr-6.10.0
   Images:
   - !ImageDetail
     ImageType: spark
@@ -11,7 +11,7 @@ EmrReleases:
     FileStructure:
     - bin-files
     - hadoop-files
-    - hadoop-jars
+    - hadoop-jars-6.10
     - java-bin
     - spark-bin
     - spark-jars
@@ -32,10 +32,52 @@ EmrReleases:
       - yarn_home
     FileStructure:
       - hadoop-files
-      - hadoop-jars
+      - hadoop-jars-6.10
       - hadoop-yarn-jars
       - hive-bin-files
-      - hive-jars
+      - hive-jars-6.10
+      - java-bin
+      - tez-jars
+    ManifestConfig: !ManifestConfig
+      Entrypoint: /usr/bin/entrypoint.sh
+      User: hadoop:hadoop
+      WorkingDir: ""
+- !EmrRelease
+  ReleaseName: emr-6.9.0
+  Images:
+  - !ImageDetail
+    ImageType: spark
+    EnvironmentVariable:
+    - java_home
+    - spark_home
+    FileStructure:
+    - bin-files
+    - hadoop-files
+    - hadoop-jars-6.9
+    - java-bin
+    - spark-bin
+    - spark-jars
+    ManifestConfig: !ManifestConfig
+      Entrypoint: /usr/bin/entrypoint.sh
+      User: hadoop:hadoop
+      WorkingDir: /home/hadoop
+  - !ImageDetail
+    ImageType: hive
+    EnvironmentVariable:
+      - hadoop_home
+      - hadoop_libexec_dir
+      - hadoop_user_home
+      - hadoop_yarn_home
+      - hive_home
+      - java_home
+      - tez_home
+      - yarn_home
+    FileStructure:
+      - hadoop-files
+      - hadoop-jars-6.9
+      - hadoop-yarn-jars
+      - hive-bin-files
+      - hive-jars-6.9
       - java-bin
       - tez-jars
     ManifestConfig: !ManifestConfig
@@ -330,7 +372,7 @@ FileStructures:
   - zookeeper-jute
   - zstd-jni
 - !FileStructure
-  Name: hadoop-jars
+  Name: hadoop-jars-6.9
   RelativeLocation: /usr/lib/hadoop/lib
   FilePrefixes:
   - accessors-smart
@@ -457,6 +499,131 @@ FileStructures:
   - zookeeper-d
   - zookeeper-jute
 - !FileStructure
+  Name: hadoop-jars-6.10
+  RelativeLocation: /usr/lib/hadoop/lib
+  FilePrefixes:
+  - accessors-smart
+  - animal-sniffer-annotations
+  - asm
+  - avro
+  - checker-qual
+  - commons-beanutils
+  - commons-cli
+  - commons-codec
+  - commons-collections
+  - commons-compress
+  - commons-configuration2
+  - commons-daemon
+  - commons-io
+  - commons-lang3
+  - commons-logging
+  - commons-math3
+  - commons-net
+  - commons-text
+  - curator-client
+  - curator-framework
+  - curator-recipes
+  - dnsjava
+  - failureaccess
+  - gson
+  - guava
+  - httpclient
+  - httpcore
+  - j2objc-annotations
+  - jackson-annotations
+  - jackson-core
+  - jackson-core-asl
+  - jackson-databind
+  - jackson-jaxrs
+  - jackson-mapper-asl
+  - jackson-xc
+  - jakarta.activation-api
+  - javax.servlet-api
+  - jaxb-api
+  - jaxb-impl
+  - jcip-annotations
+  - jersey-core
+  - jersey-json
+  - jersey-server
+  - jersey-servlet
+  - jettison
+  - jetty-http
+  - jetty-io
+  - jetty-security
+  - jetty-server
+  - jetty-servlet
+  - jetty-util
+  - jetty-util-ajax
+  - jetty-webapp
+  - jetty-xml
+  - jsch
+  - json-smart
+  - jsp-api
+  - jsr305
+  - jsr311-api
+  - jul-to-slf4j
+  - kerb-admin
+  - kerb-client
+  - kerb-common
+  - kerb-core
+  - kerb-crypto
+  - kerb-identity
+  - kerb-server
+  - kerb-simplekdc
+  - kerb-util
+  - kerby-asn1
+  - kerby-config
+  - kerby-pkix
+  - kerby-util
+  - kerby-xdr
+  - listenablefuture
+  - metrics-core
+  - native
+  - netty
+  - netty-all
+  - netty-buffer
+  - netty-codec
+  - netty-codec-dns
+  - netty-codec-haproxy
+  - netty-codec-http
+  - netty-codec-http2
+  - netty-codec-memcache
+  - netty-codec-mqtt
+  - netty-codec-redis
+  - netty-codec-smtp
+  - netty-codec-socks
+  - netty-codec-stomp
+  - netty-codec-xml
+  - netty-common
+  - netty-handler
+  - netty-handler-proxy
+  - netty-resolver
+  - netty-resolver-dns
+  - netty-resolver-dns-classes-macos
+  - netty-resolver-dns-native-macos
+  - netty-transport
+  - netty-transport-classes-epoll
+  - netty-transport-classes-kqueue
+  - netty-transport-native-epoll
+  - netty-transport-native-kqueue
+  - netty-transport-native-unix-common
+  - netty-transport-rxtx
+  - netty-transport-sctp
+  - netty-transport-udt
+  - nimbus-jose-jwt
+  - paranamer
+  - protobuf-java
+  - re2j
+  - reload4j
+  - slf4j-api
+  - slf4j-reload4j
+  - snappy-java
+  - stax2-api
+  - token-provider
+  - woodstox-core
+  - zookeeper
+  - zookeeper-d
+- !FileStructure
   Name: hadoop-files
   RelativeLocation: /usr/lib/hadoop
   FilePrefixes:
@@ -571,7 +738,7 @@ FileStructures:
   - hadoop-yarn-services-api
   - hadoop-yarn-services-core
 - !FileStructure
-  Name: hive-jars
+  Name: hive-jars-6.9
   RelativeLocation: /usr/lib/hive/lib
   FilePrefixes:
   - accessors-smart
@@ -830,6 +997,295 @@ FileStructures:
   - tink
   - transaction-api
   - unused
+  - velocity
+  - websocket-api
+  - websocket-client
+  - websocket-common
+  - websocket-server
+  - websocket-servlet
+  - xbean-asm9-shaded
+  - xz
+  - zookeeper
+  - zstd-jni
+- !FileStructure
+  Name: hive-jars-6.10
+  RelativeLocation: /usr/lib/hive/lib
+  FilePrefixes:
+  - accessors-smart
+  - accumulo-core
+  - accumulo-fate
+  - accumulo-start
+  - accumulo-trace
+  - activation
+  - aircompressor
+  - all
+  - annotations
+  - ant
+  - ant-launcher
+  - antlr-runtime
+  - antlr4-runtime
+  - aopalliance-repackaged
+  - apache-curator
+  - apache-jsp
+  - apache-jstl
+  - arpack_combined_all
+  - arrow-format
+  - arrow-memory
+  - arrow-vector
+  - asm
+  - asm-analysis
+  - asm-commons
+  - asm-tree
+  - audience-annotations
+  - auth
+  - avatica
+  - avro
+  - avro-ipc
+  - avro-mapred
+  - aws-core
+  - aws-java-sdk-emrwal
+  - aws-json-protocol
+  - bonecp
+  - caffeine
+  - checker-qual
+  - chill
+  - chill-java
+  - commons-cli
+  - commons-codec
+  - commons-collections4
+  - commons-compiler
+  - commons-compress
+  - commons-crypto
+  - commons-dbcp
+  - commons-io
+  - commons-lang
+  - commons-lang3
+  - commons-logging
+  - commons-math3
+  - commons-pool
+  - commons-vfs2
+  - compress-lzf
+  - core
+  - curator-client
+  - curator-framework
+  - curator-recipes
+  - datanucleus-api-jdo
+  - datanucleus-core
+  - datanucleus-rdbms
+  - derby
+  - disruptor
+  - dropwizard-metrics-hadoop-metrics2-reporter
+  - druid-hdfs-storage
+  - endpoints-spi
+  - error_prone_annotations
+  - eventstream
+  - flatbuffers
+  - flatbuffers-java
+  - groovy-all
+  - gson
+  - guava
+  - hadoop-shaded-guava
+  - hadoop-shaded-protobuf
+  - HikariCP
+  - hive-accumulo-handler
+  - hive-beeline
+  - hive-classification
+  - hive-cli
+  - hive-common
+  - hive-druid-handler
+  - hive-exec
+  - hive-hcatalog-core
+  - hive-hcatalog-server-extensions
+  - hive-hplsql
+  - hive-jdbc
+  - hive-jdbc-handler
+  - hive-kryo-registrator
+  - hive-llap-client
+  - hive-llap-common
+  - hive-llap-ext-client
+  - hive-llap-server
+  - hive-llap-tez
+  - hive-metastore
+  - hive-serde
+  - hive-service
+  - hive-service-rpc
+  - hive-shims
+  - hive-shims-common
+  - hive-shims-scheduler
+  - hive-spark-client
+  - hive-standalone-metastore
+  - hive-storage-api
+  - hive-streaming
+  - hive-testutils
+  - hive-upgrade-acid
+  - hive-vector-code-gen
+  - hk2-api
+  - hk2-locator
+  - hk2-utils
+  - hppc
+  - htrace-core
+  - htrace-core4
+  - http-client-spi
+  - httpclient
+  - httpcore
+  - ivy
+  - jackson-annotations
+  - jackson-bom
+  - jackson-core
+  - jackson-core-asl
+  - jackson-databind
+  - jackson-dataformat-smile
+  - jackson-mapper-asl
+  - jackson-module-scala
+  - jakarta.annotation-api
+  - jakarta.inject
+  - jakarta.servlet-api
+  - jakarta.validation-api
+  - jamon-runtime
+  - janino
+  - JavaEWAH
+  - javassist
+  - javax.activation-api
+  - javax.annotation-api
+  - javax.jdo
+  - javax.servlet-api
+  - javax.servlet.jsp
+  - javax.servlet.jsp-api
+  - javolution
+  - jaxb-api
+  - jcodings
+  - jcommander
+  - jdo-api
+  - jersey-hk2
+  - jettison
+  - jetty-annotations
+  - jetty-client
+  - jetty-http
+  - jetty-io
+  - jetty-jaas
+  - jetty-jndi
+  - jetty-plus
+  - jetty-rewrite
+  - jetty-runner
+  - jetty-schemas
+  - jetty-security
+  - jetty-server
+  - jetty-servlet
+  - jetty-util
+  - jetty-util-ajax
+  - jetty-webapp
+  - jetty-xml
+  - jline
+  - jniloader
+  - joda-time
+  - jodd-core
+  - joni
+  - jpam
+  - json
+  - json-path
+  - json-smart
+  - json-utils
+  - json4s-ast
+  - json4s-core
+  - json4s-jackson
+  - json4s-scalap
+  - jsr305
+  - jta
+  - kryo-shaded
+  - libfb303
+  - libthrift
+  - log4j-1.2-api
+  - log4j-api
+  - log4j-core
+  - log4j-slf4j-impl
+  - log4j-web
+  - lz4-java
+  - mariadb-connector-java
+  - metrics-core
+  - metrics-graphite
+  - metrics-jmx
+  - metrics-json
+  - metrics-jvm
+  - metrics-spi
+  - minlog
+  - mysql-metadata-storage
+  - native_ref-java
+  - native_system-java
+  - netlib-native_ref-linux-armhf
+  - netlib-native_ref-linux-i686
+  - netlib-native_ref-linux-x86_64
+  - netlib-native_ref-osx-x86_64
+  - netlib-native_ref-win-i686
+  - netlib-native_ref-win-x86_64
+  - netlib-native_system-linux-armhf
+  - netlib-native_system-linux-i686
+  - netlib-native_system-linux-x86_64
+  - netlib-native_system-osx-x86_64
+  - netlib-native_system-win-i686
+  - netlib-native_system-win-x86_64
+  - netty
+  - netty-all
+  - netty-buffer
+  - netty-codec
+  - netty-codec-http
+  - netty-codec-http2
+  - netty-common
+  - netty-handler
+  - netty-nio-client
+  - netty-resolver
+  - netty-transport
+  - netty-transport-classes-epoll
+  - netty-transport-native-unix-common
+  - objenesis
+  - opencsv
+  - orc-core
+  - orc-shims
+  - orc-tools
+  - org.abego.treelayout.core
+  - paranamer
+  - parquet-hadoop-bundle
+  - php
+  - pickle
+  - postgresql
+  - postgresql-metadata-storage
+  - profiles
+  - protobuf-java
+  - protocol-core
+  - py
+  - py4j
+  - re2j
+  - reactive-streams
+  - regions
+  - RoaringBitmap
+  - rocksdbjni
+  - scala-library
+  - scala-reflect
+  - scala-xml
+  - sdk-core
+  - shims
+  - snakeyaml
+  - snappy-java
+  - spark-core
+  - spark-kvstore
+  - spark-launcher
+  - spark-network-common
+  - spark-network-shuffle
+  - spark-tags
+  - spark-unsafe
+  - sqlline
+  - ST4
+  - stax-api
+  - stream
+  - super-csv
+  - taglibs-standard-impl
+  - taglibs-standard-spec
+  - tempus-fugit
+  - third-party-jackson-core
+  - threetenbp
+  - tink
+  - transaction-api
+  - unused
+  - utils
   - velocity
   - websocket-api
   - websocket-client
