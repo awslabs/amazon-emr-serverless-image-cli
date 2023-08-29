@@ -156,7 +156,14 @@ Custom Image Validation Failed. Please see individual test results above for det
 
 ## Support
 
-This tool is only supported for EMR Serverless 6.9.0 and 6.10.0. Future releases will be supported. Usage of the validation tool does not guarantee your image or job will run in EMR Serverless, but is meant to help validate common configuration issues.
+This tool is only supported for the following EMR Serverless releases:
+
+- `6.9.0`
+- `6.10.0`
+- `6.11.0`
+- `6.12.0`
+
+Future releases will be supported. Usage of the validation tool does not guarantee your image or job will run in EMR Serverless, but is meant to help validate common configuration issues.
 
 ## Security
 
