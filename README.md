@@ -92,9 +92,9 @@ location.
 The [local job run test](amazon_emr_serverless_image_cli/validation_tool/validation_tests/check_local_job_run.py) ensures that the custom image is valid and can pass basic job run. We will run a sample local spark job with following configuration:
 
 ```
-docker run -it --rm <image-uri> spark-submit 
---deploy-mode client 
---master local 
+docker run -it --rm --entrypoint /bin/bash <image-uri> spark-submit \
+--deploy-mode client \
+--master local \
 --class org.apache.spark.examples.SparkPi local:///usr/lib/spark/examples/jars/spark-examples.jar
 ```
 
